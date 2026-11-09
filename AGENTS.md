@@ -1,20 +1,21 @@
 # Dự án Link Shortener — Hướng dẫn lập trình cho LLM
 
-Đây là tệp điểm vào dành cho các agent LLM làm việc trong repository này. Tệp nêu các tiêu chuẩn lập trình chung của dự án. Các hướng dẫn chi tiết theo từng chủ đề được lưu riêng trong thư mục [`/docs`](./docs).
+Đây là tệp điểm vào dành cho các agent LLM làm việc trong repository này. Tệp nêu các tiêu chuẩn lập trình chung của dự án. Các hướng dẫn chi tiết theo từng chủ đề được lưu riêng trong `.github/instructions`.
 
-## ⚠️ Đọc tài liệu trong /docs trước
+## ⚠️ Đọc tài liệu trong .github/instructions trước
 
-**Trước khi viết hoặc sửa bất kỳ đoạn code nào, hãy đọc (các) hướng dẫn liên quan trong `/docs`.** Nếu đã có hướng dẫn cho phần bạn sắp chỉnh sửa (ví dụ: xác thực, cơ sở dữ liệu, UI), hãy tuân theo hướng dẫn đó thay vì kiến thức chung hoặc suy đoán. Nếu hướng dẫn mâu thuẫn với tệp này, hướng dẫn của chủ đề cụ thể đó được ưu tiên. Khi thêm hướng dẫn mới, hãy thêm vào bảng mục lục bên dưới.
+**Trước khi viết hoặc sửa bất kỳ đoạn code nào, hãy đọc (các) hướng dẫn liên quan trong `.github/instructions`.** Nếu đã có hướng dẫn cho phần bạn sắp chỉnh sửa (ví dụ: xác thực, cơ sở dữ liệu, UI), hãy tuân theo hướng dẫn đó thay vì kiến thức chung hoặc suy đoán. Nếu hướng dẫn mâu thuẫn với tệp này, hướng dẫn của chủ đề cụ thể đó được ưu tiên. Khi thêm hướng dẫn mới, hãy thêm vào bảng mục lục bên dưới.
 
-### Mục lục `/docs`
+### Mục lục hướng dẫn
 
 | Tệp | Đọc khi bạn… |
 | --- | ------------ |
-| [docs/clerk-auth.md](./docs/clerk-auth.md) | thay đổi xác thực Clerk, đăng nhập/đăng ký, phiên, tuyến được bảo vệ hoặc chuyển hướng xác thực |
-| [docs/ui-components.md](./docs/ui-components.md) | tạo hoặc thay đổi thành phần giao diện người dùng (UI) |
+| [.github/instructions/authentication.instructions.md](./.github/instructions/authentication.instructions.md) | thay đổi xác thực Clerk, đăng nhập/đăng ký, phiên, tuyến được bảo vệ hoặc chuyển hướng xác thực |
+| [.github/instructions/ui-components.instructions.md](./.github/instructions/ui-components.instructions.md) | tạo hoặc thay đổi thành phần giao diện người dùng (UI) |
+| [.github/instructions/data-fetching.instructions.md](./.github/instructions/data-fetching.instructions.md) | đọc/truy xuất dữ liệu (Server Component, helper trong `/data`, Drizzle ORM) |
+| [.github/instructions/data-mutations.instructions.md](./.github/instructions/data-mutations.instructions.md) | triển khai hoặc thay đổi mutation dữ liệu, Server Action hoặc helper ghi dữ liệu |
 
-
-Khi thêm hướng dẫn mới, thêm một dòng vào bảng này (`docs/<chu-de>.md` — mô tả "đọc khi bạn…").
+Khi thêm hướng dẫn mới, thêm một dòng vào bảng này (`.github/instructions/<chu-de>.instructions.md` — mô tả "đọc khi bạn…").
 
 ## Công nghệ sử dụng
 
@@ -44,7 +45,7 @@ components/     Component React dùng chung
 components/ui/  Thành phần shadcn/ui (được sinh tự động — xem phần UI)
 db/             Drizzle client (index.ts) và schema (schema.ts)
 lib/            Hàm tiện ích dùng chung (ví dụ cn trong utils.ts)
-docs/           Các tệp hướng dẫn chi tiết cho LLM
+.github/instructions/  Các tệp hướng dẫn chi tiết cho LLM
 proxy.ts        Clerk middleware (quy ước "proxy" của Next.js 16)
 drizzle/        Migration được sinh ra (không sửa tay)
 ```
@@ -68,7 +69,7 @@ Dùng path alias `@/*` (trỏ tới thư mục gốc repo) cho mọi import khô
 - Đọc và ghi dữ liệu ở phía server: đọc trong Server Component, ghi qua **Server Action** (`"use server"`) hoặc route handler. Không gọi cơ sở dữ liệu từ client component.
 - Validate mọi dữ liệu đầu vào từ bên ngoài (form data, search params, request body) ở phía server trước khi sử dụng.
 - Việc chặn/xử lý request nằm trong `proxy.ts` (không phải `middleware.ts`). Chỉ giữ các nội dung liên quan đến xác thực/định tuyến.
-- Dự án bật `cacheComponents: true`: component đọc dữ liệu runtime (`auth()`, `cookies()`, DB không cache) phải nằm trong `<Suspense>`; chi tiết trong [docs/nextjs.md](./docs/nextjs.md).
+- Dự án bật `cacheComponents: true`: component đọc dữ liệu runtime (`auth()`, `cookies()`, DB không cache) phải nằm trong `<Suspense>`.
 - Dùng `next/image`, `next/link`, `next/font` thay vì `<img>`, `<a>` (cho link nội bộ) hoặc tự nạp font.
 - Dùng các helper có kiểu (`PageProps`, `LayoutProps`) như đã dùng trong dự án khi khai báo kiểu cho route component.
 
@@ -107,7 +108,7 @@ Dùng path alias `@/*` (trỏ tới thư mục gốc repo) cho mọi import khô
 
 - Cài dependency bằng `npm` (repo dùng `package-lock.json`); không dùng trình quản lý gói khác.
 - Chỉ thêm dependency khi thực sự cần thiết và nêu rõ lý do.
-- Giữ tài liệu luôn cập nhật: nếu thay đổi hành vi được nêu trong một hướng dẫn `/docs` hoặc trong tệp này, hãy cập nhật trong cùng thay đổi.
+- Giữ tài liệu luôn cập nhật: nếu thay đổi hành vi được nêu trong một hướng dẫn trong `.github/instructions` hoặc trong tệp này, hãy cập nhật trong cùng thay đổi.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
