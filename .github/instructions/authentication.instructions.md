@@ -1,3 +1,8 @@
+---
+description: Read this before implementing or modifying authentication in the project.
+---
+
+
 # Hướng dẫn xác thực Clerk
 
 Đọc tài liệu này khi thay đổi xác thực, phiên đăng nhập, giao diện đăng nhập/đăng ký, tuyến được bảo vệ hoặc chuyển hướng liên quan đến xác thực.
